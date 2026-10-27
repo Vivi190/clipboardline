@@ -28,8 +28,10 @@ Clipboard image and text capture default to **off**. Standalone-link capture and
 public link-title/thumbnail enrichment default to **on**, matching Mac. Open
 **Settings → Sources** to change each source or enrichment preference. Existing
 explicit choices, including opt-outs, remain unchanged. Text and link capture
-never opens the shelves automatically. Local OCR/visual indexing can be disabled
-independently; search runs on this device.
+never opens the shelves automatically. In **Settings → General**, **Captured
+images** chooses what an arriving clipboard or watched-folder image opens: the
+crop editor (default), the preview, a shelf selection, or nothing. Local
+OCR/visual indexing can be disabled independently; search runs on this device.
 
 History and managed images stay on this computer. Pins, folders and tags keep
 records beyond ordinary expiry; other items have separate image/text/link time
