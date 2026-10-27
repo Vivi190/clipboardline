@@ -175,7 +175,9 @@ async function readClipboard() {
     const item=store.insert(content.kind,content.value);broadcast();
     if(item.kind==='link')void enrich(item.id);
     if(item.kind==='image'){queueOCR(item.id);refreshImageSearch();}
-    const capturedEvent=capturedImageEvent(store.data.settings,item);if(capturedEvent&&!desiredVisible)await show('shelves',capturedEvent);
+    const capturedEvent=capturedImageEvent(store.data.settings,item);
+    if(capturedEvent&&!desiredVisible)await show('shelves',capturedEvent);
+    else if(capturedEvent&&view==='shelves'){viewEvent={...capturedEvent,serial:crypto.randomUUID()};broadcast();}
   }catch(error){notify('Clipboard capture: '+error.message);}finally{capturing=false;if(pendingClipboard){pendingClipboard=false;queueMicrotask(()=>void readClipboard());}}
 }
 async function enrich(id,{refresh=false}={}) {

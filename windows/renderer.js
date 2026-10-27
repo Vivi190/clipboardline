@@ -793,7 +793,7 @@ document.addEventListener('keydown',async event=>{
  }
  if(ui.view==='library'&&!ui.preview&&event.target.closest?.('button')&&['Enter',' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key)&&!ctrl&&!event.altKey&&!event.shiftKey){await libraryControlKey(event);return;}
  if(ui.view==='library'&&ui.preview&&event.target.closest?.('button')&&['Enter',' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)&&!ctrl&&!event.altKey&&!event.shiftKey)return;
- if(ui.cropPending&&!ui.editor&&event.key==='Enter'&&!ctrl&&!event.altKey&&!event.shiftKey){event.preventDefault();ui.cropEnterQueued=true;return;}
+ if(ui.cropPending&&event.key==='Enter'&&!ctrl&&!event.altKey&&!event.shiftKey){event.preventDefault();ui.cropEnterQueued=true;return;}
  if(ui.editor){
   if(ctrl&&event.key.toLowerCase()==='z'){event.preventDefault();imageUndo(event.shiftKey);return;}
   if(ctrl&&event.key.toLowerCase()==='s'){event.preventDefault();await saveImage(false);return;}

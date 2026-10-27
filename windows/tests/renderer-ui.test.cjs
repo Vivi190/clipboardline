@@ -724,7 +724,7 @@ test('an Enter during the screenshot crop opening queues the crop instead of cop
  assert.equal(f.commands.filter(value=>value.action==='copy').length,1,'Once the editor is ready, Enter copies as usual');
  assert.equal(f.state.windowVisible,false);
 });
-test('an Enter while the crop image is still decoding neither copies nor saves',async()=>{
+test('an Enter while the crop image is still decoding queues and applies the crop when ready',async()=>{
  const f=fixture({deferImageLoad:true});await f.ready();
  f.api.emit({viewEvent:{serial:'decode-crop',selectId:f.image,kind:'image',preview:true,crop:true}});
  await f.ready();
@@ -733,7 +733,6 @@ test('an Enter while the crop image is still decoding neither copies nor saves',
  assert.equal(f.commands.filter(value=>value.action==='copy').length,0);
  assert.equal(f.commands.filter(value=>value.action==='saveImage').length,0);
  f.releaseImageLoads();await f.ready();
- await f.key('Enter');
- assert.equal(f.commands.filter(value=>value.action==='copy').length,0);
- assert.doesNotMatch(f.overlay,/id="markup-canvas"/);
+ assert.equal(f.commands.filter(value=>value.action==='copy').length,0,'The queued Enter applies the crop instead of copying');
+ assert.doesNotMatch(f.overlay,/id="markup-canvas"/,'The queued Enter applied the empty crop and returned to the preview');
 });

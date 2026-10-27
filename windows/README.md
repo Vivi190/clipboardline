@@ -155,7 +155,10 @@ Kullandığınız derlemenin Windows CI sonucuna ve sürüm dosyalarına bakın.
 Pano görseli ve metni toplama varsayılan **kapalı**; tek URL toplama ve genel
 link başlığı/küçük görsel zenginleştirmesi varsayılan **açıktır**. Ayarlar →
 Kaynaklar’dan ayrı ayrı değiştirilebilir; eski kapalı tercihler korunur. Metin
-ve link kopyaları askıyı otomatik açmaz. Yerel OCR/görsel indeksleme kapatılabilir.
+ve link kopyaları askıyı otomatik açmaz. Ayarlar → Genel’deki **Yakalanan
+görseller** seçeneği, panodan veya izlenen bir klasörden gelen görselin ne
+açacağını belirler: crop düzenleyici (varsayılan), önizleme, askıda seçim veya
+hiçbiri. Yerel OCR/görsel indeksleme kapatılabilir.
 Geçmiş yerel kalır; platformlar arası otomatik aktarım veya bulut senkronizasyonu
 sunulmaz.
 
