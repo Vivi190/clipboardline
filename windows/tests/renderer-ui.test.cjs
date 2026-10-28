@@ -736,3 +736,17 @@ test('an Enter while the crop image is still decoding queues and applies the cro
  assert.equal(f.commands.filter(value=>value.action==='copy').length,0,'The queued Enter applies the crop instead of copying');
  assert.doesNotMatch(f.overlay,/id="markup-canvas"/,'The queued Enter applied the empty crop and returned to the preview');
 });
+test('a second capture event keeps its queued Enter when the first crop opener is stale',async()=>{
+ const f=fixture({deferImageLoad:true});await f.ready();
+ const second='00000000-0000-4000-8000-000000000005';
+ f.api.emit({items:[...f.state.items,{id:second,kind:'image',createdAt:1100,updatedAt:1100,name:'',title:'',text:'',url:'',pinned:false,folderIds:[],tags:[],trashedAt:null,hiddenFromShelf:false,mediaUrl:'appmedia://media/'+second,originalMediaUrl:'appmedia://media/'+second+'/original'}]});
+ f.api.emit({viewEvent:{serial:'first',selectId:f.image,kind:'image',preview:true,crop:true}});
+ await f.ready();
+ f.api.emit({viewEvent:{serial:'second',selectId:second,kind:'image',preview:true,crop:true}});
+ await f.ready();
+ await f.key('Enter');
+ assert.equal(f.commands.filter(value=>value.action==='copy').length,0,'Enter during the second decode must not copy');
+ f.releaseImageLoads();await f.ready();
+ assert.equal(f.commands.filter(value=>value.action==='copy').length,0);
+ assert.doesNotMatch(f.overlay,/id="markup-canvas"/,'The queued Enter applies the second crop and returns to the preview');
+});
